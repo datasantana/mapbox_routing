@@ -20,6 +20,7 @@ import SidePanel from './components/SidePanel.vue';
       floating
       permanent
       :location="$vuetify.display.mobile ? 'bottom' : undefined"
+      width="300"
     >
       <SidePanel />
       

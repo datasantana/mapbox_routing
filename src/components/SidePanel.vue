@@ -1,6 +1,6 @@
 <template>
     <v-card
-        class="mx-auto"
+        class="mx-auto h-100"
         prepend-icon="mdi-view-dashboard"
         title="Lezenet"
         subtitle="Reporte de operaciones"
@@ -21,12 +21,18 @@
         <v-divider></v-divider>
         <v-card-text>
             <span class="subheading">Filtros y controles</span>
-            <v-chip-group v-model="selectedChip" selected-class="text-primary" mandatory>
+            <v-chip-group 
+                v-model="selectedChip" 
+                selected-class="text-primary bg-green-accent-1"
+                mandatory
+                color="primary"
+            >
                 <v-chip 
                     v-for="(tag, index) in tags" 
                     :key="tag"
                     :value="index"
                     @click="handleChipSelection(index)"
+                    variant="tonal"
                 >
                     {{ tag }}
                 </v-chip>
@@ -83,28 +89,88 @@
                     :max="maxSliderDays"
                     :step="1"
                     color="primary"
-                    thumb-label
                     show-ticks="always"
-                    tick-size="4"
+                    tick-size="2"
                     @update:model-value="onSliderChange"
                     class="mt-2"
                 >
-                    <template v-slot:thumb-label="{ modelValue }">
-                        {{ getDateFromSliderValue(modelValue).toLocaleDateString('es-ES', { day: 'numeric', month: 'short' }) }}
-                    </template>
                 </v-range-slider>
             </div>
         </v-card-text>
         <v-divider></v-divider>
-        <v-card-item>
-            <v-list
-                density="compact"
-                nav
-            >
-                <v-list-item prepend-icon="mdi-view-dashboard" title="Home" value="home"></v-list-item>
-                <v-list-item prepend-icon="mdi-forum" title="About" value="about"></v-list-item>
-            </v-list>
-        </v-card-item>
+        <v-card-text>
+            <span class="subheading">Principales estadísticas</span>
+            
+            <!-- Statistics Row -->
+            <v-row class="mt-3">
+                <!-- Número de Unidades -->
+                <v-col cols="4" class="pa-1">
+                    <v-card 
+                        variant="outlined" 
+                        class="text-center pa-3"
+                        color="primary"
+                    >
+                        <v-icon 
+                            icon="mdi-truck" 
+                            size="large" 
+                            color="primary"
+                            class="mb-2"
+                        ></v-icon>
+                        <div class="text-h5 font-weight-bold text-primary">
+                            24
+                        </div>
+                        <div class="text-caption text-medium-emphasis">
+                            Unidades
+                        </div>
+                    </v-card>
+                </v-col>
+
+                <!-- Número de Viajes -->
+                <v-col cols="4" class="pa-1">
+                    <v-card 
+                        variant="outlined" 
+                        class="text-center pa-3"
+                        color="success"
+                    >
+                        <v-icon 
+                            icon="mdi-map-marker-path" 
+                            size="large" 
+                            color="success"
+                            class="mb-2"
+                        ></v-icon>
+                        <div class="text-h5 font-weight-bold text-success">
+                            156
+                        </div>
+                        <div class="text-caption text-medium-emphasis">
+                            Viajes
+                        </div>
+                    </v-card>
+                </v-col>
+
+                <!-- Total de Kilómetros -->
+                <v-col cols="4" class="pa-1">
+                    <v-card 
+                        variant="outlined" 
+                        class="text-center pa-3"
+                        color="warning"
+                    >
+                        <v-icon 
+                            icon="mdi-speedometer" 
+                            size="large" 
+                            color="warning"
+                            class="mb-2"
+                        ></v-icon>
+                        <div class="text-h5 font-weight-bold text-warning">
+                            12.54
+                        </div>
+                        <div class="text-caption text-medium-emphasis">
+                            Kilómetros
+                        </div>
+                    </v-card>
+                </v-col>
+            </v-row>
+        </v-card-text>
+        <v-divider></v-divider>
         <v-card-actions>
             <!--place here button actions for map interaction-->
         </v-card-actions>
@@ -243,6 +309,6 @@ const clearDates = () => {
 
 </script>
 
-<style>
+<style scoped>
 
 </style>
